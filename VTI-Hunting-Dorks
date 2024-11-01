@@ -1,0 +1,13 @@
+entity:url content:"function red()"
+
+entity:url title:""Sign in to your account" ls:{$DATE}+ p:1+ not url "login.microsoftonline.com"
+
+entity:domain soa_record:digicertdns.com and asn:50340 and a_record:193.3.19/24 and last_modification_date:{$DATE}
+
+entity:url url:"https://cdn.discordapp.com/attachments*" p:1+
+
+entity:domain category:"newly registered websites" asn:XXXXX tag:dga p:1+
+
+entity:file has:behaviour_network behaviour_network:*.top p:15+
+
+entity:fie type:js content:"beacon" p:15+ 
