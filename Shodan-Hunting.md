@@ -28,7 +28,7 @@ http.favicon.hash:-111783006
 * There are many ways to hunt for C2 panels. here's 2 simple ways a) You could use the `tag:c2` filter (paid) b) search for the favicon hashes of popular C2 panels
 * Here's a list of favicon hashes https://github.com/sansatart/scrapts/blob/master/shodan-favicon-hashes.csv
 ---
----
+
 4) Hunt for Vulnerable infrastructure
 ```
 has_vuln:1 product:ivanti
