@@ -1,0 +1,27 @@
+title: Webserver_Dev_Features
+status: stable
+description: Scan for Development Features Enabled in Prodcution
+references:
+    - https://isc.sans.edu/diary/Development+Features+Enabled+in+Production/31380
+    - https://breakfix.co/posts/apache-struts2-ognl-console-and-devmode-exploitation/
+    
+author: Conrad Fernandes
+date: 2024-11-06
+tags:
+    - attack.initial-access
+    - attack.t1190
+logsource:
+    category: webserver
+detection:
+    keywords:
+        - '/struts/webconsole.html'
+        - '/telescope/requests'
+        - '/server-status'
+        - '/logs/debug.log'
+        - '/storage/logs/system.log'
+        - '/phpunit/phpunit/Util/PHP/eval-stdin.php'
+
+    condition: keywords
+falsepositives:
+    - Legitimate apps the use these paths or active testing maybe on
+level: high
