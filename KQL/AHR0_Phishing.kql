@@ -1,0 +1,7 @@
+\\"AHR0" could indicate a phishing attempt
+\\ Watch out for false positives! 
+EmailUrlInfo
+| where Url matches regex "(?i)AHR0"
+| extend DecodedUrl = base64_decode_tostring(extract(@"AHR0\w+", 0, Url))
+| where isnotempty(DecodedUrl)
+| project Timestamp, Sender, Recipient, Url, DecodedUrl
