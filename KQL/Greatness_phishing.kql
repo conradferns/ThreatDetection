@@ -1,0 +1,7 @@
+// Greateness Phishing Campaigns ref: https://www.vadesecure.com/en/blog/greatness-phishing-as-a-service
+let ExcludedDomains = datatable (domains:string) ["test1.io", "test2.com"];
+EmailEvents
+| join kind=inner EmailUrlInfo on NetworkMessageId
+| where SenderFromDomain !in (ExcludedDomains)
+| where ThreatTypes !in ("Phish", "Spam")
+| where Url matches regex "https?:\/\/.*\/\w{1,4}\.php"
