@@ -1,0 +1,35 @@
+title: PowerShell Web Access Detection
+status: stable
+description: PowerShell Web Access spawns a portal that allows you to send commands via a webpage. This essentially creates a legitimate webshell and if compromised it will allow an attacker easy access for lateral movement. You should also ensure this service is not exposed to the web. 
+references:
+    - https://docs.microsoft.com/en-us/powershell/module/powershellwebaccess/install-pswawebapplication
+    - https://www.splunk.com/en_us/blog/security/powershell-web-access-your-network-s-backdoor-in-plain-sight.html
+author: Conrad Fernandes
+date: 2024-11-07
+tags:
+    - attack.persistence
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_dism:
+        CommandLine|contains|all:
+            - 'dism'
+            - '/online'
+            - '/enable-feature'
+            - '/featurename:WindowsPowerShellWebAccess'
+    selection_feature:
+        Image|endswith: '\powershell.exe'
+        CommandLine|contains|all:
+            - 'WindowsPowerShellWebAccess'
+    selection_authoriztion:
+        CommandLine|contains|all:
+            - 'Add-PswaAuthorizationRule'
+            - '-UserName'
+            - '-ComputerName'
+    condition: 1 of selection_*
+
+falsepositives:
+    - This could be used by network and system admins but it should ideally be disabled. 
+level: high
