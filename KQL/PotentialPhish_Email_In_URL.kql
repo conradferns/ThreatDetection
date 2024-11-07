@@ -1,0 +1,7 @@
+//Matches common phishing pattern with Email ID (FirstName.LastName@XYZ.com) at the end.
+let ExcludedDomains = datatable (domains:string) ["test1.io", "test2.com"];
+EmailEvents
+| join kind=inner EmailUrlInfo on NetworkMessageId
+| where SenderFromDomain !in (ExcludedDomains)
+| where ThreatTypes !in ("Phish", "Spam")
+| where Url matches regex "\s?#\w{1,15}\.\w{1,15}@\w{1,15}\.\w{2,}"
