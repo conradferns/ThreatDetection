@@ -1,0 +1,5 @@
+//Ref: https://app.any.run/tasks/0dfc1df7-348d-4dc8-bf91-41df98d94e67
+DeviceProcessEvents
+| where InitiatingProcessFolderPath contains "AppData"
+    and InitiatingProcessFileName endswith ".svg"
+| where ProcessCommandLine matches regex @"(?i)(msedge|chrome)"
